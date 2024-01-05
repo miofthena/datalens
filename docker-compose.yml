@@ -14,7 +14,7 @@ services:
     image: ghcr.io/datalens-tech/datalens-control-api:0.2042.0
     environment:
       BI_API_UWSGI_WORKERS_COUNT: 4
-      CONNECTOR_AVAILABILITY_VISIBLE: "clickhouse,postgres,chyt,ydb"
+      CONNECTOR_AVAILABILITY_VISIBLE: "clickhouse,postgres,chyt"
       RQE_FORCE_OFF: 1
       DL_CRY_ACTUAL_KEY_ID: key_1
       DL_CRY_KEY_VAL_ID_key_1: "h1ZpilcYLYRdWp7Nk8X1M1kBPiUi8rdjz9oBfHyUKIk="
@@ -22,8 +22,6 @@ services:
       US_HOST: "http://us"
       US_MASTER_TOKEN: "fake-us-master-token"
       CONFIG_PATH: "/etc/backend-configs/api.yaml"
-    ports:
-      - 8081:8080
     depends_on:
       - us
     volumes:
@@ -45,8 +43,6 @@ services:
       US_HOST: "http://us"
       US_MASTER_TOKEN: "fake-us-master-token"
       CONFIG_PATH: "/etc/backend-configs/api.yaml"
-    ports:
-      - 8082:8080
     depends_on:
       - us
       - pg-compeng
@@ -86,10 +82,8 @@ services:
       POSTGRES_DSN_LIST: ${METADATA_POSTGRES_DSN_LIST:-postgres://us:us@pg-us:5432/us-db-ci_purgeable}
       SKIP_INSTALL_DB_EXTENSIONS: ${METADATA_SKIP_INSTALL_DB_EXTENSIONS:-0}
       USE_DEMO_DATA: ${USE_DEMO_DATA:-1}
-      HC: ${HC:-0}
+      HC: 1
       NODE_EXTRA_CA_CERTS: /certs/root.crt
-    ports:
-      - "8083:80"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
@@ -98,8 +92,9 @@ services:
   datalens:
     container_name: datalens-ui
     image: ghcr.io/datalens-tech/datalens-ui:0.1137.0
+    user: root
     ports:
-      - 8080:80
+      - 7180:80
     depends_on:
       - us
       - control-api
@@ -114,4 +109,4 @@ services:
       BI_API_ENDPOINT: "http://control-api:8080"
       BI_DATA_ENDPOINT: "http://data-api:8080"
       NODE_EXTRA_CA_CERTS: "/usr/local/share/ca-certificates/cert.pem"
-      HC: ${HC:-0}
+      HC: 1

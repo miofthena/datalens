@@ -75,6 +75,7 @@ services:
     image: ghcr.io/datalens-tech/datalens-us:0.133.0
     depends_on:
       - pg-us
+    user: root
     environment:
       APP_INSTALLATION: "opensource"
       APP_ENV: "prod"

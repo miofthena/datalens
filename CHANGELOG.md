@@ -1,5 +1,38 @@
 # Changelog
 
+## 2024-01-26
+
+### Updated images
+- datalens-us: 0.133.0 -> 0.143.0
+- datalens-ui: 0.1137.0 -> 0.1245.0
+
+### Changed
+- Add line support for d3 visualizations ([ui:#334](https://github.com/datalens-tech/datalens-ui/pull/334))
+- Add shapes support for d3 visualizations ([ui:#516](https://github.com/datalens-tech/datalens-ui/pull/516))
+- Add postgres env vars for US ([us:#54](https://github.com/datalens-tech/datalens-us/pull/54))
+- Disable old relations ([ui:#518](https://github.com/datalens-tech/datalens-ui/pull/518))
+- Fix removing comments in QL charts ([ui:#523](https://github.com/datalens-tech/datalens-ui/pull/523))
+- Fix chart autoHeight calculation ([ui:#482](https://github.com/datalens-tech/datalens-ui/pull/482))
+
+## 2024-01-24
+
+### Updated images
+- datalens-control-api: 0.2042.0 -> 0.2046.0
+- datalens-data-api: 0.2042.0 -> 0.2046.0
+
+### Changed
+
+- Switched datalens-control-api and datalens-data-api containers to rootless mode
+- Updated datalens-control-api & datalens-data-api base image from Ubuntu 20.04 to 22.04
+- Fixed dataset loading when the connection is deleted
+- Constant expressions are now removed from GROUP BY during query compilation
+
+## 2024-01-20
+- Add `UI_PORT` env param
+
+## 2024-01-15
+- Add `docker-compose-dev.yml`
+
 ## 2023-12-27
 
 ### Updated images
